@@ -1,5 +1,5 @@
 package edu.dosw.bootcamp.lab.util;
-
+import edu.dosw.bootcamp.lab.solid.reto1TiendaDonPepe.Reto1TiendaDonPepe;
 import edu.dosw.bootcamp.lab.creacionales.reto2ChefEstrellas.Reto2ChefEstrellas;
 import edu.dosw.bootcamp.lab.comportamiento.reto4CasaDeCambio.Reto4CasaDeCambio;
 import edu.dosw.bootcamp.lab.comportamiento.reto6SoporteTecnico.Reto6SoporteTecnico;
@@ -8,6 +8,8 @@ import edu.dosw.bootcamp.lab.estructurales.reto8Zoologico.Reto8Zoologico;
 public class AppRunner {
 
     public static void run() {
+        // Reto 1
+        Reto1TiendaDonPepe.ejecutar();
         // Reto 2
         Reto2ChefEstrellas.ejecutar();
 
