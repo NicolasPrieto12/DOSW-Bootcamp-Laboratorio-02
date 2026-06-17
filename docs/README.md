@@ -51,8 +51,8 @@ El precio unitario de `Producto` es `final` y solo se asigna en el constructor. 
 - `Carrito.calcularSubtotal()` → `mapToDouble + sum`
 
 ## Evidencia de ejecución
-```
-![Reto 1](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto1.png)
+
+![Reto1](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto1.png)
 
 ---
 
@@ -79,7 +79,6 @@ Sistema para construir hamburguesas personalizadas paso a paso. El cliente elige
 | `Reto2ChefEstrellas` | Cliente — instancia el Chef y muestra el resultado |
 
 ## Evidencia de ejecución
-```
 
 ![Reto 2](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto2.png)
 
@@ -113,9 +112,8 @@ Concesionaria que vende vehículos de tierra, acuáticos y aéreos en categoría
 - `compra.stream().mapToDouble(Vehiculo::getPrecio).sum()` para el total de la compra.
 
 ## Evidencia de ejecución
-```
 
-![Reto 3]()
+![Reto 3](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto3.png)
 
 ---
 
@@ -148,10 +146,8 @@ Casa de cambio honesta que convierte entre COP, EUR, JPY y USD usando tasas de c
 - `transacciones.stream().mapToDouble(Transaccion::getEquivalenteUSD).sum()` para el total acumulado en USD.
 
 ## Evidencia de ejecución
-```
 
-![Reto 4]()
-
+![Reto 4](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto4.png)
 
 ---
 
@@ -180,9 +176,8 @@ Cafetería que permite personalizar un café base (Espresso) agregando toppings 
 | `Reto5CafePersonalizado` | Cliente — encadena decoradores según la elección del usuario |
 
 ## Evidencia de ejecución
-```
 
-![Reto 5]()
+![Reto 5](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto5.png)
 
 ---
 
@@ -215,10 +210,8 @@ Sistema que recibe tickets con distintos niveles de complejidad. Cada técnico i
 - Promedio prioridad: `tickets.stream().filter(Ticket::isResuelto).mapToInt(Ticket::getPrioridadValor).average()`
 
 ## Evidencia de ejecución
-```
 
-![Reto 6]()
-
+![Reto 6](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto6.png)
 
 ---
 
@@ -249,4 +242,4 @@ Control remoto que permite a múltiples usuarios ejecutar acciones sobre disposi
 
 ## Evidencia de ejecución
 
-![Reto 7]()
+![Reto 7](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto7.png)

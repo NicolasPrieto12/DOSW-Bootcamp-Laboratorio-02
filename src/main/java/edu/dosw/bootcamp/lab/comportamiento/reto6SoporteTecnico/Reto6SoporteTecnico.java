@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Reto6SoporteTecnico {
 
-    public static void ejecutar() {
+    public static void main() {
         Scanner sc = new Scanner(System.in);
 
         TecnicoBasico basico = new TecnicoBasico();
