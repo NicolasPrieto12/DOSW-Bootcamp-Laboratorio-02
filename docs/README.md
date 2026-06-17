@@ -52,7 +52,7 @@ El precio unitario de `Producto` es `final` y solo se asigna en el constructor. 
 
 ## Evidencia de ejecución
 ```
-![Reto 1]()
+![Reto 1](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto1.png)
 
 ---
 
