@@ -1,9 +1,7 @@
 package edu.dosw.bootcamp.lab;
-
 import edu.dosw.bootcamp.lab.creacionales.reto2ChefEstrellas.Reto2ChefEstrellas;
 import edu.dosw.bootcamp.lab.comportamiento.reto4CasaDeCambio.Reto4CasaDeCambio;
 import edu.dosw.bootcamp.lab.comportamiento.reto6SoporteTecnico.Reto6SoporteTecnico;
-import edu.dosw.bootcamp.lab.estructurales.reto8Zoologico.Reto8Zoologico;
 import edu.dosw.bootcamp.lab.solid.reto1TiendaDonPepe.Reto1TiendaDonPepe;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,7 +17,5 @@ public class Application {
         Reto4CasaDeCambio.main();
         // Reto 6
         Reto6SoporteTecnico.main();
-        // Reto 8
-        Reto8Zoologico.main();
     }
 }
