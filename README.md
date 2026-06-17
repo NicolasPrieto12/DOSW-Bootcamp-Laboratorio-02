@@ -68,7 +68,7 @@ Sistema para construir hamburguesas personalizadas paso a paso. El cliente elige
 
 **Justificación:** Una hamburguesa tiene muchos componentes opcionales. Sin Builder, el constructor tendría demasiados parámetros y sería confuso. Builder permite construir el objeto paso a paso, solo con los ingredientes que el cliente elija, manteniendo el código limpio y legible.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
@@ -96,7 +96,7 @@ Concesionaria que vende vehículos de tierra, acuáticos y aéreos en categoría
 
 **Justificación:** El problema tiene dos dimensiones de variación: tipo de medio (tierra, acuático, aéreo) y categoría (económico, lujo, usado). Abstract Factory permite crear familias de vehículos sin que el código cliente conozca las clases concretas. Agregar un nuevo tipo de medio solo requiere una nueva fábrica sin modificar nada existente.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
@@ -129,7 +129,7 @@ Casa de cambio honesta que convierte entre COP, EUR, JPY y USD usando tasas de c
 
 **Justificación:** Cada moneda tiene su propia lógica de conversión. Sin Strategy, habría un bloque `if/else` gigante mezclado con la lógica del negocio. Con Strategy, cada moneda encapsula su regla de conversión en una clase separada. Agregar una nueva moneda solo requiere crear una nueva clase que implemente `EstrategiaConversion`.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
@@ -163,7 +163,7 @@ Cafetería que permite personalizar un café base (Espresso) agregando toppings 
 
 **Justificación:** El problema requiere agregar funcionalidades (toppings) a un objeto base (café) de forma dinámica, sin modificar la clase original. Cada decorador envuelve al anterior sumando su precio y descripción. Cumple el principio Abierto/Cerrado: agregar un nuevo topping solo requiere crear una nueva clase que extienda `ToppingDecorador`.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
@@ -193,7 +193,7 @@ Sistema que recibe tickets con distintos niveles de complejidad. Cada técnico i
 
 **Justificación:** Cada ticket debe ser procesado por el técnico adecuado, pero el sistema no sabe de antemano quién lo resolverá. La cadena permite que cada técnico intente resolver el ticket y, si no puede, lo pase al siguiente. Agregar un nuevo nivel solo requiere crear un nuevo `Tecnico` e insertarlo en la cadena.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
@@ -227,7 +227,7 @@ Control remoto que permite a múltiples usuarios ejecutar acciones sobre disposi
 
 **Justificación:** El patrón Command encapsula cada acción como un objeto independiente, lo que permite guardarlas en un historial y deshacerlas individualmente sin que el control remoto sepa cómo funciona cada dispositivo internamente. Cada comando sabe cómo ejecutarse y cómo revertirse.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
@@ -255,8 +255,9 @@ Sistema de gestión del zoológico ECI Zoo con animales de tres especies, cuidad
 
 ## Diagrama UML de Clases
 
-![Reto 8]()
+![Reto 8](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto8UML.png)
 
+https://lucid.app/lucidchart/fae45f47-d5ff-44c1-aee9-33e7a41108f2/edit?invitationId=inv_128280fd-3b48-492f-b1ad-f47ac2d73a8c&page=0_0#
 ---
 
 ## Descripción del diseño
@@ -283,7 +284,7 @@ Tiene nombre, edad, lista de animales favoritos y fotografías. Sus métodos son
 
 **Justificación:** Los animales pueden tener atributos dinámicos adicionales (color de pelaje, origen, rareza, historial médico) que no todos comparten y que pueden combinarse entre sí. El patrón Decorator permite agregar estos atributos envolviendo el animal en capas, sin modificar las clases base ni crear una explosión de subclases para cada combinación posible.
 
-**Cómo lo apliqué:**
+**Cómo lo aplicamos:**
 
 | Clase | Rol |
 |-------|-----|
