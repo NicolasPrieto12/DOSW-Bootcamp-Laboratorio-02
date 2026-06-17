@@ -1,245 +1,114 @@
-# DOSW Bootcamp — Laboratorio 2
-## Hackathon Express · SOLID · Patrones · UML
+# Laboratorio 02 — Preguntas Iniciales
 
-**Integrantes:** Sara Arteaga · Nicolás Prieto  
-**Rama:** feature/ArteagaSara_PrietoNicolas_2026-INT
-
----
-
-# Reto 1 — La Tienda de Don Pepe
-
-## Descripción
-Sistema de ventas que permite a un cliente elegir productos de un catálogo, agregarlos al carrito y obtener un recibo con descuento según su tipo (nuevo o frecuente).
-
-## Principios SOLID aplicados
-
-**S — Single Responsibility Principle**  
-Cada clase tiene una sola responsabilidad:
-- `Producto`: representa un producto con nombre y precio.
-- `ItemCarrito`: une un producto con la cantidad comprada.
-- `Carrito`: gestiona la lista de ítems y calcula el subtotal.
-- `Recibo`: imprime el resumen de la compra.
-- `Cliente`: guarda el tipo de cliente y su estrategia de descuento.
-
-**O — Open/Closed Principle**  
-La interfaz `EstrategiaDescuento` permite agregar nuevos tipos de descuento sin modificar clases existentes. Solo se crea una nueva clase que implemente la interfaz.
-
-**L — Liskov Substitution Principle**  
-`DescuentoNuevo` y `DescuentoFrecuente` son intercambiables en cualquier lugar donde se use `EstrategiaDescuento` sin romper el comportamiento del programa.
-
-**I — Interface Segregation Principle**  
-La interfaz `EstrategiaDescuento` es pequeña y específica: solo define `calcularDescuento()` y `getDescripcion()`.
-
-**D — Dependency Inversion Principle**  
-`Cliente` y `Recibo` dependen de la abstracción `EstrategiaDescuento`, no de `DescuentoNuevo` o `DescuentoFrecuente` directamente.
-
-## Polimorfismo
-Se aplica a través de `EstrategiaDescuento`. Según el tipo ingresado, `Cliente` asigna una implementación distinta:
-```java
-if (tipo.equalsIgnoreCase("frecuente")) {
-    this.descuento = new DescuentoFrecuente(); // 10%
-} else {
-    this.descuento = new DescuentoNuevo();     // 5%
-}
-```
-`Recibo` llama `cliente.getDescuento().calcularDescuento(subtotal)` sin saber qué implementación concreta está usando.
-
-## Inmutabilidad
-El precio unitario de `Producto` es `final` y solo se asigna en el constructor. Ninguna parte del sistema puede modificarlo después de ser creado.
-
-## Streams usados
-- `Carrito.calcularSubtotal()` → `mapToDouble + sum`
-
-## Evidencia de ejecución
-
-![Reto1](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto1.png)
+> Respuestas fundamentadas de la **Parte 1 — Preparación del espacio de trabajo**.
+> Equipo: Sara Arteaga / Nicolás Prieto
 
 ---
 
-# Reto 2 — El Chef de 5 Estrellas
+### 1. ¿Qué ventaja ofrece el polimorfismo en el diseño de clases frente al uso de múltiples condicionales para determinar el comportamiento de un objeto?
 
-## Descripción
-Sistema para construir hamburguesas personalizadas paso a paso. El cliente elige pan, carne, queso, vegetales y salsa. El chef ensambla la hamburguesa y muestra el precio total.
+El polimorfismo permite que cada clase implemente su propio comportamiento mediante la sobreescritura de métodos, evitando largas cadenas de `if/else` o `switch` que verifican el tipo de objeto antes de actuar.
 
-## Patrón de Diseño
+Esto trae varios beneficios:
 
-**Categoría:** Creacional  
-**Patrón utilizado:** Builder
+- **Código más limpio y legible**, sin condicionales anidados que crecen con cada nuevo caso.
+- **Extensibilidad**: para agregar un nuevo tipo basta con crear una nueva clase que implemente la interfaz o herede de la clase base, sin modificar el código existente.
+- **Menor acoplamiento**: el código cliente solo conoce la interfaz común, no los detalles internos de cada implementación.
 
-**Justificación:** Una hamburguesa tiene muchos componentes opcionales. Sin Builder, el constructor tendría demasiados parámetros y sería confuso. Builder permite construir el objeto paso a paso, solo con los ingredientes que el cliente elija, manteniendo el código limpio y legible.
-
-**Cómo lo apliqué:**
-
-| Clase | Rol |
-|-------|-----|
-| `Hamburguesa` | Producto final — contiene todos los ingredientes y calcula el total |
-| `HamburguesaBuilder` | Builder — acumula ingredientes con métodos encadenables y construye con `build()` |
-| `Ingrediente` | Clase inmutable — nombre y precio de cada componente |
-| `Chef` | Director — usa el Builder para tomar el pedido paso a paso |
-| `Reto2ChefEstrellas` | Cliente — instancia el Chef y muestra el resultado |
-
-## Evidencia de ejecución
-
-![Reto 2](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto2.png)
 
 ---
 
-# Reto 3 — El Reino de los Vehículos
+### 2. ¿Por qué una clase inmutable puede mejorar la seguridad en un sistema?
+ 
+Una clase inmutable es aquella cuyo estado no puede modificarse una vez creado el objeto: todos sus atributos son `final` y no existen setters que permitan cambiarlos después de la construcción.
+ 
+Esto mejora la seguridad de varias formas:
+ 
+- **Evita modificaciones accidentales o maliciosas** del estado del objeto desde otras partes del código.
+- **Es segura en entornos concurrentes (thread-safe)**: como el estado no cambia, varios hilos pueden leer el mismo objeto sin riesgo de condiciones de carrera, sin necesidad de sincronización adicional.
+- **Facilita el razonamiento sobre el código**: si un objeto se crea con ciertos valores, se puede confiar en que esos valores serán los mismos durante todo su ciclo de vida, lo que reduce errores difíciles de depurar.
+- **Protege la encapsulación**: al no exponer setters, se elimina por completo la posibilidad de dejar el objeto en un estado inválido después de su creación.
+ 
+---
 
-## Descripción
-Concesionaria que vende vehículos de tierra, acuáticos y aéreos en categorías Económico, Lujo y Usado. El usuario elige cuántos vehículos comprar, su tipo, modelo y categoría. Al final se muestra el total con Streams.
+### 3. ¿Qué problema podría aparecer en un sistema si los atributos de las clases se mantienen públicos en lugar de privados con getters y setters controlados?
 
-## Patrón de Diseño
+Si los atributos son públicos, cualquier parte del programa puede modificarlos directamente sin pasar por ninguna validación, lo que puede dejar el objeto en un **estado inconsistente o inválido** (por ejemplo, asignar un saldo negativo o una edad fuera de rango).
 
-**Categoría:** Creacional  
-**Patrón utilizado:** Abstract Factory
+Principales problemas:
 
-**Justificación:** El problema tiene dos dimensiones de variación: tipo de medio (tierra, acuático, aéreo) y categoría (económico, lujo, usado). Abstract Factory permite crear familias de vehículos sin que el código cliente conozca las clases concretas. Agregar un nuevo tipo de medio solo requiere una nueva fábrica sin modificar nada existente.
+- **Violación del encapsulamiento**: la lógica de validación queda dispersa o ausente.
+- **Difícil mantenimiento**: no hay un punto centralizado de control sobre cómo cambian los datos.
+- **Mayor riesgo de errores**: el estado del objeto puede alterarse desde cualquier lugar del código, dificultando el rastreo de bugs.
 
-**Cómo lo apliqué:**
-
-| Clase | Rol |
-|-------|-----|
-| `FabricaVehiculos` | Interfaz Abstract Factory — define `crearVehiculo(modelo, categoria)` |
-| `FabricaTierra` | Fábrica concreta — crea Auto, Bicicleta, Moto |
-| `FabricaAcuatica` | Fábrica concreta — crea Lancha, Velero, Jet Ski |
-| `FabricaAerea` | Fábrica concreta — crea Avion, Avioneta, Helicoptero |
-| `Vehiculo` | Producto abstracto — atributos comunes y getters |
-| `Auto`, `Moto`, `Lancha`, etc. | Productos concretos — velocidad y precio según categoría |
-| `Reto3ReinoVehiculos` | Cliente — elige la fábrica y usa `crearVehiculo()` |
-
-## Streams usados
-- `compra.stream().mapToDouble(Vehiculo::getPrecio).sum()` para el total de la compra.
-
-## Evidencia de ejecución
-
-![Reto 3](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto3.png)
+Usar getters y setters permite validar, controlar y registrar los cambios, además de poder modificar la implementación interna sin afectar a quienes usan la clase.
 
 ---
 
-# Reto 4 — La Estafa de la Casa de Cambio
+### 4. Según el principio Abierto/Cerrado, ¿cómo deberíamos modificar el sistema si queremos añadir una nueva funcionalidad sin alterar el código existente?
+ 
+El **Principio Abierto/Cerrado (OCP)** establece que las entidades de software (clases, módulos, funciones) deben estar **abiertas para extensión, pero cerradas para modificación**.
+ 
+Esto significa que, para añadir una nueva funcionalidad, no deberíamos modificar las clases ya existentes y probadas, sino:
+ 
+- **Crear nuevas clases** que implementen una interfaz o hereden de una clase abstracta ya definida, agregando el nuevo comportamiento.
+- **Usar polimorfismo** para que el código cliente trabaje con la abstracción común, sin necesidad de conocer las nuevas implementaciones.
+- Apoyarse en **patrones de diseño** (como Strategy, Decorator o Factory) que faciliten extender el comportamiento del sistema sin tocar el código central.
+ 
+De esta manera, el código existente permanece estable (sin riesgo de introducir nuevos bugs) y el sistema crece simplemente agregando nuevas piezas que se acoplan a través de las abstracciones ya definidas.
+ 
+---
 
-## Descripción
-Casa de cambio honesta que convierte entre COP, EUR, JPY y USD usando tasas de cambio reales. El usuario ingresa X transacciones y al final se muestra el total equivalente en USD.
+### 5. ¿Por qué es importante que una clase cumpla con el Principio de Única Responsabilidad? Da un ejemplo donde se vulnere.
 
-## Patrón de Diseño
+El **Principio de Única Responsabilidad (SRP)** establece que una clase debe tener una sola razón para cambiar, es decir, debe encargarse de una sola tarea o responsabilidad bien definida.
 
-**Categoría:** Comportamiento  
-**Patrón utilizado:** Strategy
+Es importante porque:
 
-**Justificación:** Cada moneda tiene su propia lógica de conversión. Sin Strategy, habría un bloque `if/else` gigante mezclado con la lógica del negocio. Con Strategy, cada moneda encapsula su regla de conversión en una clase separada. Agregar una nueva moneda solo requiere crear una nueva clase que implemente `EstrategiaConversion`.
+- Facilita el **mantenimiento** y las **pruebas unitarias**.
+- Favorece la **reutilización** del código.
+- Evita que un cambio en una responsabilidad rompa funcionalidades no relacionadas.
 
-**Cómo lo apliqué:**
+**Ejemplo donde se vulnera:**
+Una clase `Empleado` que, además de almacenar los datos del empleado (nombre, salario, cargo), también calcula el pago de nómina, genera reportes en PDF y guarda los datos en la base de datos. Si cambia la forma de generar el reporte o la lógica de la base de datos, hay que modificar la clase `Empleado`, aunque su responsabilidad principal debería ser solo representar los datos del empleado.
 
-| Clase | Rol |
-|-------|-----|
-| `EstrategiaConversion` | Interfaz Strategy — define `convertir()`, `getCodigo()`, `getSimbolo()` |
-| `ConversionCOP` | Estrategia concreta — lógica de conversión para COP |
-| `ConversionEUR` | Estrategia concreta — lógica de conversión para EUR |
-| `ConversionJPY` | Estrategia concreta — lógica de conversión para JPY |
-| `ConversionUSD` | Estrategia concreta — lógica de conversión para USD |
-| `CasaDeCambio` | Contexto — selecciona la estrategia y ejecuta la conversión |
-| `Transaccion` | Guarda el resultado con su equivalente en USD |
-| `Reto4CasaDeCambio` | Cliente — lee transacciones y muestra el resumen |
-
-## Streams usados
-- `transacciones.stream().mapToDouble(Transaccion::getEquivalenteUSD).sum()` para el total acumulado en USD.
-
-## Evidencia de ejecución
-
-![Reto 4](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto4.png)
+La solución sería separar esas responsabilidades en clases independientes, como `CalculadoraNomina`, `GeneradorReporte` y `RepositorioEmpleado`.
 
 ---
 
-# Reto 5 — El Café Personalizado
+### 6. ¿Qué es y para qué usamos el `pom.xml`?
+ 
+El `pom.xml` (**Project Object Model**) es el archivo de configuración central de un proyecto Maven. Es un documento XML que describe el proyecto y administra todo su ciclo de vida.
+ 
+Entre sus principales usos están:
+ 
+- **Definir información del proyecto**: nombre, versión, descripción, grupo (`groupId`), artefacto (`artifactId`), etc.
+- **Gestionar dependencias**: especifica las librerías externas que necesita el proyecto y sus versiones, descargándolas automáticamente desde repositorios remotos.
+- **Configurar el ciclo de vida de construcción**: define cómo se compila, prueba, empaqueta y despliega el proyecto (por ejemplo, la versión de Java a usar mediante `maven-compiler-plugin`).
+- **Definir plugins**: herramientas adicionales que extienden las capacidades de Maven (ejecutar pruebas, generar documentación, ejecutar la aplicación, etc.).
+ 
+ 
+---
 
-## Descripción
-Cafetería que permite personalizar un café base (Espresso) agregando toppings dinámicamente. Cada topping añade su precio y descripción. Se pueden agregar nuevos toppings sin modificar la clase base del café.
+### 7. ¿Qué diferencia hay entre `mvn compile`, `mvn package` y `mvn install`?
 
-## Patrón de Diseño
+| Comando | Qué hace |
+|---|---|
+| **`mvn compile`** | Compila el código fuente (`src/main/java`) y genera los `.class` en `target/classes`. No genera ningún artefacto empaquetado. |
+| **`mvn package`** | Compila, ejecuta las pruebas unitarias y empaqueta el proyecto en el formato definido en el `pom.xml` (`.jar` o `.war`), dejándolo en `target/`. |
+| **`mvn install`** | Hace todo lo anterior y además **instala** el artefacto generado en el repositorio local de Maven (`~/.m2/repository`), para que pueda usarse como dependencia en otros proyectos locales. |
 
-**Categoría:** Estructural  
-**Patrón utilizado:** Decorator
-
-**Justificación:** El problema requiere agregar funcionalidades (toppings) a un objeto base (café) de forma dinámica, sin modificar la clase original. Cada decorador envuelve al anterior sumando su precio y descripción. Cumple el principio Abierto/Cerrado: agregar un nuevo topping solo requiere crear una nueva clase que extienda `ToppingDecorador`.
-
-**Cómo lo apliqué:**
-
-| Clase | Rol |
-|-------|-----|
-| `Cafe` | Interfaz componente — define `getDescripcion()` y `getPrecio()` |
-| `Espresso` | Componente concreto — café base con precio $3.500 |
-| `ToppingDecorador` | Decorador abstracto — envuelve un `Cafe` y delega por defecto |
-| `LecheAvena` | Decorador concreto — agrega +$1.200 y descripción |
-| `Caramelo` | Decorador concreto — agrega +$800 y descripción |
-| `Chantilly` | Decorador concreto — agrega +$1.000 y descripción |
-| `Reto5CafePersonalizado` | Cliente — encadena decoradores según la elección del usuario |
-
-## Evidencia de ejecución
-
-![Reto 5](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto5.png)
+Cada fase incluye a las anteriores: `install` ejecuta `package`, que a su vez ejecuta `compile`.
 
 ---
 
-# Reto 6 — Soporte Técnico
+### 8. ¿Qué diferencia existe entre una interfaz y una clase abstracta?
+ 
+| Aspecto | Interfaz | Clase abstracta |
+|---|---|---|
+| **Propósito** | Define un **contrato** de comportamiento (qué debe hacer una clase). | Define una **base común** parcialmente implementada (qué es y qué hace una clase). |
+| **Métodos** | Por defecto todos son abstractos (sin cuerpo), aunque desde Java 8 puede tener métodos `default` y `static`. | Puede tener métodos abstractos **y** métodos concretos con implementación. |
+| **Atributos** | Solo constantes (`public static final`), no tiene estado propio. | Puede tener atributos de instancia con estado. |
+| **Herencia** | Una clase puede implementar **múltiples interfaces**. | Una clase solo puede extender **una** clase abstracta (herencia simple). |
+| **Constructor** | No tiene constructor. | Puede tener constructores, usados por las subclases mediante `super()`. |
 
-## Descripción
-Sistema que recibe tickets con distintos niveles de complejidad. Cada técnico intenta resolver el ticket y si no puede, lo pasa al siguiente en la cadena. Al final se muestran estadísticas con Streams.
-
-## Patrón de Diseño
-
-**Categoría:** Comportamiento  
-**Patrón utilizado:** Chain of Responsibility
-
-**Justificación:** Cada ticket debe ser procesado por el técnico adecuado, pero el sistema no sabe de antemano quién lo resolverá. La cadena permite que cada técnico intente resolver el ticket y, si no puede, lo pase al siguiente. Agregar un nuevo nivel solo requiere crear un nuevo `Tecnico` e insertarlo en la cadena.
-
-**Cómo lo apliqué:**
-
-| Clase | Rol |
-|-------|-----|
-| `Tecnico` | Handler abstracto — define `manejar()` y `setSiguiente()` |
-| `TecnicoBasico` | Handler concreto — resuelve nivel básico, pasa el resto |
-| `TecnicoIntermedio` | Handler concreto — resuelve nivel intermedio, pasa el resto |
-| `TecnicoAvanzado` | Handler concreto — resuelve nivel avanzado, marca pendiente si es crítico |
-| `Ticket` | Contiene descripción, nivel, prioridad y estado de resolución |
-| `Reto6SoporteTecnico` | Cliente — crea la cadena y envía los tickets |
-
-## Streams usados
-- Conteo por técnico: `tickets.stream().filter(t -> t.isResuelto() && t.getResolvedBy().equals(...)).count()`
-- Pendientes: `tickets.stream().filter(t -> !t.isResuelto()).count()`
-- Promedio prioridad: `tickets.stream().filter(Ticket::isResuelto).mapToInt(Ticket::getPrioridadValor).average()`
-
-## Evidencia de ejecución
-
-![Reto 6](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto6.png)
-
----
-
-# Reto 7 — El Control Remoto Mágico
-
-## Descripción
-Control remoto que permite a múltiples usuarios ejecutar acciones sobre dispositivos del hogar (luces, puertas, música, persianas). Mantiene un historial con el usuario que realizó cada acción y permite deshacer acciones individuales.
-
-## Patrón de Diseño
-
-**Categoría:** Comportamiento  
-**Patrón utilizado:** Command
-
-**Justificación:** El patrón Command encapsula cada acción como un objeto independiente, lo que permite guardarlas en un historial y deshacerlas individualmente sin que el control remoto sepa cómo funciona cada dispositivo internamente. Cada comando sabe cómo ejecutarse y cómo revertirse.
-
-**Cómo lo apliqué:**
-
-| Clase | Rol |
-|-------|-----|
-| `Comando` | Interfaz — define `ejecutar()`, `deshacer()`, `getDescripcion()` |
-| `ComandoLuces` | Comando concreto — encender/apagar con intensidad |
-| `ComandoPuertas` | Comando concreto — abrir/cerrar puerta |
-| `ComandoMusica` | Comando concreto — reproducir/parar con volumen |
-| `ComandoPersianas` | Comando concreto — subir/bajar con porcentaje |
-| `RegistroAccion` | Almacena el comando, el usuario y si fue deshecho |
-| `ControlRemoto` | Invocador — ejecuta comandos y mantiene el historial |
-| `Reto7ControlRemoto` | Cliente — crea los comandos según el input del usuario |
-
-## Evidencia de ejecución
-
-![Reto 7](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto7.png)
