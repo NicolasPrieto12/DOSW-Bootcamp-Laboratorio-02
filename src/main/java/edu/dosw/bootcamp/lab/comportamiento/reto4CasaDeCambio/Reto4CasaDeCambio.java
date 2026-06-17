@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Reto4CasaDeCambio {
 
-    public static void ejecutar() {
+    public static void main() {
         Scanner sc = new Scanner(System.in);
         CasaDeCambio casa = new CasaDeCambio();
         List<Transaccion> transacciones = new ArrayList<>();

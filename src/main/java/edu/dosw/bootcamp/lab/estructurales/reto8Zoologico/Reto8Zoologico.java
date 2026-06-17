@@ -2,7 +2,7 @@ package edu.dosw.bootcamp.lab.estructurales.reto8Zoologico;
 
 public class Reto8Zoologico {
 
-    public static void ejecutar() {
+    public static void main() {
         // Animales base
         Mamifero leon = new Mamifero("Leon", 5, "Carnivoro", "Carne", 190, 1.2, "Saludable", "Sabana", "Roar");
         Reptil cocodrilo = new Reptil("Cocodrilo", 10, "Carnivoro", "Pez", 500, 0.5, "Saludable", "Rio", "Hiss");
