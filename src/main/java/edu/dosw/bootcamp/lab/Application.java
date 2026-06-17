@@ -5,6 +5,7 @@ import edu.dosw.bootcamp.lab.creacionales.reto3ReinoVehiculos.Reto3ReinoVehiculo
 import edu.dosw.bootcamp.lab.comportamiento.reto4CasaDeCambio.Reto4CasaDeCambio;
 import edu.dosw.bootcamp.lab.estructurales.reto5CafePersonalizado.Reto5CafePersonalizado;
 import edu.dosw.bootcamp.lab.comportamiento.reto6SoporteTecnico.Reto6SoporteTecnico;
+import edu.dosw.bootcamp.lab.comportamiento.reto7ControlRemoto.Reto7ControlRemoto;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -23,6 +24,6 @@ public class Application {
         // Reto 6
         Reto6SoporteTecnico.main();
         // Reto 7
-
+        Reto7ControlRemoto.main();
     }
 }
