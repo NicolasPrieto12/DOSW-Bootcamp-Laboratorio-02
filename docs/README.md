@@ -80,7 +80,7 @@ Sistema para construir hamburguesas personalizadas paso a paso. El cliente elige
 
 ## Evidencia de ejecución
 
-
+![Reto 2](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto2.png)
 
 ---
 
@@ -113,7 +113,7 @@ Concesionaria que vende vehículos de tierra, acuáticos y aéreos en categoría
 
 ## Evidencia de ejecución
 
-
+![Reto 3](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto3.png)
 
 ---
 
@@ -147,7 +147,7 @@ Casa de cambio honesta que convierte entre COP, EUR, JPY y USD usando tasas de c
 
 ## Evidencia de ejecución
 
-
+![Reto 4](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto4.png)
 
 ---
 
@@ -177,7 +177,7 @@ Cafetería que permite personalizar un café base (Espresso) agregando toppings 
 
 ## Evidencia de ejecución
 
-
+![Reto 5](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto5.png)
 
 ---
 
@@ -211,7 +211,7 @@ Sistema que recibe tickets con distintos niveles de complejidad. Cada técnico i
 
 ## Evidencia de ejecución
 
-
+![Reto 6](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto6.png)
 
 ---
 
@@ -241,3 +241,5 @@ Control remoto que permite a múltiples usuarios ejecutar acciones sobre disposi
 | `Reto7ControlRemoto` | Cliente — crea los comandos según el input del usuario |
 
 ## Evidencia de ejecución
+
+![Reto 7](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto7.png)
