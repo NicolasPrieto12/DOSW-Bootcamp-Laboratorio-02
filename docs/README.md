@@ -1,6 +1,5 @@
 # Laboratorio 02 — Preguntas Iniciales
 
-> Respuestas fundamentadas de la **Parte 1 — Preparación del espacio de trabajo**.
 > Equipo: Sara Arteaga / Nicolás Prieto
 
 ---
