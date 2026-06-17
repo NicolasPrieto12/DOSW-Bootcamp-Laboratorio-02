@@ -81,7 +81,7 @@ Sistema para construir hamburguesas personalizadas paso a paso. El cliente elige
 ## Evidencia de ejecución
 ```
 
-![Reto 2]()
+![Reto 2](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto2.png)
 
 ---
 
