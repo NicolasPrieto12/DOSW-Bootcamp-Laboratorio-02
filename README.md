@@ -243,3 +243,73 @@ Control remoto que permite a múltiples usuarios ejecutar acciones sobre disposi
 ## Evidencia de ejecución
 
 ![Reto 7](https://github.com/NicolasPrieto12/DOSW-Bootcamp-Laboratorio-02/blob/main/Reto7.png)
+
+---
+
+# Reto 8 — El Zoológico de los UML
+
+## Descripción
+Sistema de gestión del zoológico ECI Zoo con animales de tres especies, cuidadores que los atienden y visitantes que interactúan con ellos. Diseñado con SOLID, patrones de diseño y documentado con diagrama UML de clases.
+
+---
+
+## Diagrama UML de Clases
+
+![Reto 8]()
+
+---
+
+## Descripción del diseño
+
+### Jerarquía de Animal
+`Animal` es una clase abstracta con atributos comunes (nombre, edad, dieta, alimento preferido, peso, altura, estado de salud, hábitat) y métodos `emitirSonido()` y `comer()`. De ella heredan tres especies concretas:
+
+- **Mamifero**: agrega atributo `sonido` e implementa `emitirSonido()` y `getDescription()`
+- **Reptil**: agrega atributo `sonido` e implementa `emitirSonido()` y `getDescription()`
+- **Ave**: agrega atributo `sonido` e implementa `emitirSonido()` y `getDescription()`
+
+### Cuidador
+Tiene nombre, edad, especialidad y una lista de animales asignados. Sus métodos son `asignarAnimal()`, `alimentar()`, `bañar()` y `limpiarHabitat()`. Se asocia con 1 o más animales (1..*).
+
+### Visitante
+Tiene nombre, edad, lista de animales favoritos y fotografías. Sus métodos son `alimentar()`, `darPropina()`, `subirFoto()` y `agregarFavorito()`. Se asocia con 0 o más animales (0..*).
+
+---
+
+## Patrón de Diseño
+
+**Categoría:** Estructural
+**Patrón utilizado:** Decorator
+
+**Justificación:** Los animales pueden tener atributos dinámicos adicionales (color de pelaje, origen, rareza, historial médico) que no todos comparten y que pueden combinarse entre sí. El patrón Decorator permite agregar estos atributos envolviendo el animal en capas, sin modificar las clases base ni crear una explosión de subclases para cada combinación posible.
+
+**Cómo lo apliqué:**
+
+| Clase | Rol |
+|-------|-----|
+| `Animal` | Componente abstracto — define la interfaz base |
+| `Mamifero`, `Reptil`, `Ave` | Componentes concretos — implementaciones base de cada especie |
+| `AnimalDecorator` | Decorador abstracto — envuelve un `Animal` y delega por defecto |
+| `ConPelaje` | Decorador concreto — agrega atributo `colorPelaje` y lo incluye en `getDescription()` |
+| `ConOrigen` | Decorador concreto — agrega atributo `origen` y lo incluye en `getDescription()` |
+| `ConRareza` | Decorador concreto — agrega atributo `rareza` y lo incluye en `getDescription()` |
+| `ConHistorialMedico` | Decorador concreto — agrega lista `historial` con método `agregarRegistro()` |
+
+---
+
+## Principios SOLID aplicados
+
+**S — Single Responsibility Principle**
+Cada clase tiene una sola responsabilidad: `Animal` representa un animal, `Cuidador` gestiona el cuidado, `Visitante` maneja las interacciones del visitante, y cada decorador agrega un único atributo dinámico.
+
+**O — Open/Closed Principle**
+El sistema está abierto para agregar nuevos atributos dinámicos (nuevos decoradores) sin modificar las clases `Animal`, `Mamifero`, `Reptil` o `Ave`.
+
+**L — Liskov Substitution Principle**
+`Mamifero`, `Reptil`, `Ave` y todos los decoradores pueden usarse en cualquier lugar donde se espere un `Animal` sin alterar el comportamiento del sistema.
+
+**I — Interface Segregation Principle**
+Los métodos de `Cuidador` y `Visitante` están separados según su responsabilidad. No se obliga a ninguna clase a implementar métodos que no le corresponden.
+
+**D — Dependency Inversion Principle**
+`Cuidador` y `Visitante` dependen de la abstracción `Animal`, no de `Mamifero`, `Reptil` o `Ave` directamente.
